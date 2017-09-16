@@ -171,7 +171,8 @@ typedef struct Namelist Namelist;
 #define max(a,b) ((a) >= (b) ? (a) : (b))
 #endif
 #define dmin(a,b) (doublereal)min(a,b)
-#define dmax(a,b) (doublereal)max(a,b)
+//#define dmax(a,b) (doublereal)max(a,b)
+#define dmax(a,b) (doublereal)((a) >= (b) ? (a) : (b))
 
 /* procedure parameter types for -A and -C++ */
 
