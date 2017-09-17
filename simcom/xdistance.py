@@ -4,6 +4,8 @@ import math
 
 import simcom.tlmclient as TC
 
+
+
 sc0_pos = [0, 0, 0]
 sc0_vel = [0,0,0]
 sc1_pos = [0,0,0]
