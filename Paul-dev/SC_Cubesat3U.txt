@@ -6,13 +6,13 @@ PROTOTYPE_FSW                   !  Flight Software Identifier
 ************************* Orbit Parameters ****************************
 ENCKE                         !  Orbit Prop FIXED, EULER_HILL, or ENCKE
 CM                            !  Pos of CM or ORIGIN, wrt F
-  -10.0000   0.00000   0.00000 ! Pos wrt F
+  -20.0000   0.00000   0.00000 ! Pos wrt F
    0.00000   0.00000   0.00000 ! Vel wrt F
 *************************** Initial Attitude ***************************
 NAN                           ! Ang Vel wrt [NL], Att [QA] wrt [NLF]
 0.0    0.1    0.0             ! Ang Vel (deg/sec)
 0.0    0.0    0.0    1.0      ! Quaternion
-0.0    0.0    0.0    123      ! Angles (deg) & Euler Sequence
+45.0    45.0    45.0    123      ! Angles (deg) & Euler Sequence
 ***************************  Dynamics Flags  ***************************
 KIN_JOINT                     ! Rotation STEADY, KIN_JOINT, or DYN_JOINT
 TRUE                          ! Assume constant mass properties

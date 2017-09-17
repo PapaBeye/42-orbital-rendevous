@@ -17,7 +17,10 @@ samplevars = 'POSITION  5.687925e+06 -3.137816e+06 0.000000e+00\n'\
     +'MAGVEC  -2.905525e-06 1.209234e-05 3.249486e-05\n'\
     +'ANGMOM  -4.951036e+00 -3.791701e+00 3.393439e+00\n'
 
+
+
 def processmessage(mes):
+
     lines = mes.split('\n')
     coords = {}
     for line in lines:
@@ -39,10 +42,42 @@ def processmessage(mes):
                 #coords[components[0]] = comp_arr
                 coords['TIME'] = milliseconds
             elif components[0] == 'SC':
+                # print('SPACECRAFT ', components[1])
                 coords['SC'] = int(components[1])
     # for (key, val) in coords.items():
     #     print(key, ': ', val)
     return coords
+
+
+def scmess(sc, i, lines):
+    while (lines[i].split()[0] != 'SC' and lines[i].split()[0] != '[EOF]'):
+        components = lines[i].split()
+        # print(components)
+        if components.__len__() == 4:
+            comp_arr = [float(components[1]), float(components[2]), float(components[3])]
+            sc[components[0]] = comp_arr
+        elif components.__len__() == 5:
+            comp_arr = [float(components[1]), float(components[2]), float(components[3]), float(components[4])]
+            sc[components[0]] = comp_arr
+        i += 1
+    return i
+ms = 0
+
+def processmessage2(mes):
+    global ms
+    lines = mes.split('\n')
+    if lines[0].split()[0] == 'TIME':
+        time = lines[0].split()[1]
+        # print('got time: ', time)
+        ms = (3600000 * int(time[9:11])) + (60000 * int(time[12:14])) + int(1000.0 * float(time[15:21]))
+        None
+    else:
+        i = 0
+        sc0 = {}
+        i = scmess(sc0, 1, lines)
+        sc1 = {}
+        scmess(sc1, i+1, lines)
+        return ms, sc0, sc1
 
 # processmessage(samplet + samplevars)
 
@@ -57,19 +92,23 @@ def get_tlm_message():
     s.send(b'x')
     data = s.recv(BUFFER_SIZE)
     mess = data.decode('utf-8')
-    # global counter
+    global counter
     # print(counter, ' raw mess 1: ', mess)
-    if (mess.split().__len__() <= 2):
-        s.send(b'x')
-        data = s.recv(BUFFER_SIZE)
-        # print(counter, 'raw mess 2: ', data)
-        mess += data.decode('utf-8')
+    # if (mess.split().__len__() <= 2):
+    #     s.send(b'x')
+    #     data = s.recv(BUFFER_SIZE)
+    #     # print(counter, 'raw mess 2: ', data)
+    #     mess += data.decode('utf-8')
     # print(counter, 'combined message1: ', mess)
-    # counter += 1
-    return processmessage(mess)
+    counter += 1
+    resp = processmessage2(mess)
+    if resp is None:
+        return get_tlm_message()
+    else:
+        return resp
 
-while (True):
-    print(get_tlm_message())
+# while (True):
+#     print(get_tlm_message())
 
 
 # s.close()
