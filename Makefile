@@ -101,7 +101,7 @@ ifeq ($(42PLATFORM),__linux__)
       GUIOBJ = $(OBJ)42GlutGui.o $(OBJ)glkit.o 
       #GLINC = -I /usr/include/
       GLINC = -I $(KITDIR)/include/GL/
-      LIBS = -lglut -lGLU -lGL 
+      LIBS = -lglut -lGLU -lGL -lpthread
       LFLAGS = -L $(KITDIR)/GL/lib/
       ARCHFLAG = 
    else
@@ -164,7 +164,7 @@ else
    FFTBOBJ = 
 endif
 
-CFLAGS = -Wall -Wshadow -Wno-deprecated -g  $(GLINC) $(CINC) -I $(INC) -I $(KITINC) -I $(KITSRC) -I $(MATLABSRC) -I $(MATLABINC) -I $(SIMULINKINC) -O0 $(ARCHFLAG) $(GUIFLAG) $(SHADERFLAG) $(TIMEFLAG) $(SOCKETFLAG) $(EMBEDDED) $(CFDFLAG) $(FFTBFLAG)  
+CFLAGS = -Wall -Wshadow -Wno-deprecated -g  $(GLINC) $(CINC) -I $(INC) -I $(KITINC) -I $(KITSRC) -I $(MATLABSRC) -I $(MATLABINC) -I $(SIMULINKINC) -O0 $(ARCHFLAG) $(GUIFLAG) $(SHADERFLAG) $(TIMEFLAG) $(SOCKETFLAG) $(EMBEDDED) $(CFDFLAG) $(FFTBFLAG)
 
 42OBJ = $(OBJ)42main.o $(OBJ)42exec.o $(OBJ)42actuators.o $(OBJ)42cmd.o \
 $(OBJ)42dynam.o $(OBJ)42environs.o $(OBJ)42ephem.o $(OBJ)42fsw.o \

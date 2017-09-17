@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <pthread.h>
 
 #include "42types.h"
 #include "42defines.h"
@@ -154,6 +155,7 @@ void SensorDriver(struct SCType *S);
 void FlightSoftWare(struct SCType *S);
 void ActuatorDriver(struct SCType *S);
 void Actuators(struct SCType *S);
+void start_cmd_thread(void);
 void CmdInterpreter(void);
 void Report(void);
 void DrawScene(void);

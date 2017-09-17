@@ -297,6 +297,7 @@ int exec(int argc,char **argv)
 {
       long Isc;
       long Done = 0;
+      start_cmd_thread();
 
       InitSim(argc,argv);
       for (Isc=0;Isc<Nsc;Isc++) {

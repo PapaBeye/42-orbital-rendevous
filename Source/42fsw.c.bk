@@ -19,15 +19,6 @@
 //using namespace Kit;
 //#endif
 
-
-
-
-
-
-
-
-
-
 /**********************************************************************/
 long FswCmdInterpreter(char CmdLine[512],double *CmdTime)
 {

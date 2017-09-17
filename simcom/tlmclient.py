@@ -8,7 +8,7 @@ IP = '127.0.0.1'
 PORT = 42420
 BUFFER_SIZE = 1024
 
-
+s = None
 
 samplet = 'TIME  2014-172-01:01:05.000000000\n'
 samplevars = 'POSITION  5.687925e+06 -3.137816e+06 0.000000e+00\n'\
@@ -85,10 +85,7 @@ def processmessage2(mes):
 
 
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((IP, PORT))
 
-atexit.register(s.close)
 counter = 0
 def get_tlm_message():
     s.send(b'x')
@@ -115,8 +112,18 @@ def get_tlm_message():
 
 # s.close()
 
+def connect():
+    global s;
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((IP, PORT))
+
+    atexit.register(s.close)
+
+
+latest_distance = 0.0
 
 def monitor_tlm():
+    global latest_distance
     print("Started TLM monitor")
     while (True):
         # time.sleep(1)
@@ -126,8 +133,8 @@ def monitor_tlm():
             p0 = sc0['POSITION']
             p1 = sc1['POSITION']
             distance = math.sqrt(pow(p0[0] - p1[0], 2) + pow(p0[1] - p1[1], 2) + pow(p0[2] - p1[2], 2))
-            print('Time:(ms) ', ms, " dist: ", distance, sc0['POSITION'], sc1['POSITION'], sc0['VELOCITY'],
-                  sc1['VELOCITY'])
+            latest_distance = distance
+            # print('Time:(ms) ', ms, " dist: ", distance, sc0['POSITION'], sc1['POSITION'], sc0['VELOCITY'], sc1['VELOCITY'])
 
 
         except Exception as e:
@@ -136,6 +143,7 @@ def monitor_tlm():
 
 
 if __name__ == "__main__":
+    connect()
     monitor_tlm()
 
 
