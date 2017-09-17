@@ -3708,7 +3708,8 @@ void Idle(void)
                glutPostRedisplay();
                if (CaptureCam) {
                   CamFrame++;
-                  sprintf(CamFileName,"CamFrame%05ld.ppm",CamFrame);
+//                  sprintf(CamFileName,"CamFrame%05ld.ppm",CamFrame);
+                  sprintf(CamFileName,"CamFrame%06.0lf.ppm",SimTime);
                   glutSetWindow(CamWindow);
                   CaptureScreenToPpm("./Screenshots/",
                      CamFileName,CamHeight,CamWidth);
