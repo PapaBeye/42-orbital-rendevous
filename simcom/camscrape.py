@@ -3,7 +3,7 @@ import subprocess
 import simcom.tlmclient
 
 import time
-import simcom.imagedistance
+import simcom.imagedistance2
 
 import os
 
@@ -18,7 +18,7 @@ old_filenames = os.listdir(ss_dir)
 def handle_new_image(ms, path):
     tlm_distance = simcom.tlmclient.latest_distance
     print(ms, " ", path)
-    img_distance = simcom.imagedistance.get_dist_w_fl(path)
+    img_distance = simcom.imagedistance2.get_dist_w_fl(path)
     print("Distance comparison: ", tlm_distance, " ", img_distance)
 
 
@@ -27,8 +27,9 @@ def scrapeloop():
     global ss_dir, old_filenames
     print("Starting scrape loop")
     while True:
-        print("scrape loop")
+        # print("scrape loop")
         current_filenames = os.listdir(ss_dir)
+        # print(current_filenames)
         new_filenames = []
         for fn in current_filenames:
             if fn not in old_filenames:
@@ -55,7 +56,6 @@ def scrapeloop():
         for new_fn in new_filenames:
             os.remove(ss_dir + "/" + new_fn)
         time.sleep(2)
-
 
 if __name__ == "__main__":
     scrapeloop()
