@@ -5,13 +5,13 @@ TRUE                               !  Map Window Exists
 TRUE                               !  Orrery Window Exists
 ******************************* POV *********************************
 FALSE                              !  Pause at Startup
-FIXED_IN_HOST                         !  POV Mode (TRACK_HOST, TRACK_TARGET, FIXED_IN_HOST)
+TRACK_HOST                         !  POV Mode (TRACK_HOST, TRACK_TARGET, FIXED_IN_HOST)
 SC                                 !  Host Type (WORLD, REFORB, FRM, SC, BODY)
 1  0  L                            !  Initial Host SC, Body, POV Frame
 SC                                 !  Target Type (WORLD, REFORB, FRM, SC, BODY)
 1  0  L                            !  Initial Target SC, Body, POV Frame
-POS_Z                              !  Boresight Axis
-NEG_Y                              !  Up Axis
+POS_Y                              !  Boresight Axis
+NEG_Z                              !  Up Axis
 40.0                               !  Initial POV Range from Target [m]
 30.0                               !  POV Angle (Vertical) [deg]
 0.0  0.0  0.0                      !  POV Position in Host [m]
