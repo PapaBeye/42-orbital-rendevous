@@ -22,7 +22,7 @@ int inc_pop()
     } else {
         next_pop += BUFF_SIZE;
     }
-    pthread_mutex_lock(&lock);
+    pthread_mutex_unlock(&lock);
 }
 
 int inc_push()
@@ -33,7 +33,7 @@ int inc_push()
     } else {
         next_push += BUFF_SIZE;
     }
-    pthread_mutex_lock(&lock);
+    pthread_mutex_unlock(&lock);
 }
 
 int is_cmd_avail()
@@ -41,7 +41,7 @@ int is_cmd_avail()
     int res;
     pthread_mutex_lock(&lock);
     res = (next_pop == next_push);
-    pthread_mutex_lock(&lock);
+    pthread_mutex_unlock(&lock);
 }
 
 char *next_command()
@@ -55,7 +55,7 @@ char *next_command()
         res = next_pop;
         next_pop += BUFF_SIZE;
     }
-    pthread_mutex_lock(&lock);
+    pthread_mutex_unlock(&lock);
     return res;
 }
 
@@ -84,7 +84,8 @@ void* worker(void *arg){
         printf("Cmdtime: %f \n", CmdTime);
 
         fclose(CmdFile);
-        next_push += BUFF_SIZE;
+        //next_push += BUFF_SIZE;
+        inc_push();
         }
     return NULL;
 }
@@ -106,6 +107,7 @@ void main(int argc, char **argv)
     printf("mainloop\n");
     sleep(1);
     char *next_cmd = next_command();
+    printf("checked next cmd\n");
     if (next_cmd){
         printf("nextcmd: %s\n", next_cmd);
     }
