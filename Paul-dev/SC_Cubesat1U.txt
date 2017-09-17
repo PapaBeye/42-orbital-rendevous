@@ -2,12 +2,12 @@
 1-U Cubesat                   !  Description
 "Cube 1"                      !  Label
 GenScSpriteAlpha.ppm          !  Sprite File Name
-PASSIVE_FSW                   !  Flight Software Identifier
+PROTOTYPE_FSW                   !  Flight Software Identifier
 ************************* Orbit Parameters ****************************
 ENCKE                         !  Orbit Prop FIXED, EULER_HILL, or ENCKE
 CM                            !  Pos of CM or ORIGIN, wrt F
-   0.00000   0.00000   2.50000 ! Pos wrt F
-   0.00566   0.00283  -0.00000 ! Vel wrt F
+   0.00000   0.00000   0.00000 ! Pos wrt F
+   0.00000   0.00000   0.00000 ! Vel wrt F
 *************************** Initial Attitude ***************************
 NAN                           ! Ang Vel wrt [NL], Att [QA] wrt [NLF]
 0.0    0.1    0.0             ! Ang Vel (deg/sec)

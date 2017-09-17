@@ -10,6 +10,7 @@ def writeline(line):
 writeline("1.0")
 writeline("2.0")
 writeline("3.0")
+writeline("4.0")
 writeline("-1.0")
 print("done")
 

@@ -2,17 +2,17 @@
 3-U Cubesat                   !  Description
 "Cube 3"                      !  Label
 GenScSpriteAlpha.ppm          !  Sprite File Name
-PASSIVE_FSW                   !  Flight Software Identifier
+PROTOTYPE_FSW                   !  Flight Software Identifier
 ************************* Orbit Parameters ****************************
 ENCKE                         !  Orbit Prop FIXED, EULER_HILL, or ENCKE
 CM                            !  Pos of CM or ORIGIN, wrt F
-  -4.3301e+00   6.1232e-16  -1.2500e+00 ! Pos wrt F
-  -2.8284e-03   2.8284e-03   2.4495e-03 ! Vel wrt F
+  -20.0000   0.00000   0.00000 ! Pos wrt F
+   0.00000   0.00000   0.00000 ! Vel wrt F
 *************************** Initial Attitude ***************************
 NAN                           ! Ang Vel wrt [NL], Att [QA] wrt [NLF]
 0.0    0.1    0.0             ! Ang Vel (deg/sec)
 0.0    0.0    0.0    1.0      ! Quaternion
-0.0    0.0    0.0    123      ! Angles (deg) & Euler Sequence
+0.0    50.0    0.0    123      ! Angles (deg) & Euler Sequence
 ***************************  Dynamics Flags  ***************************
 KIN_JOINT                     ! Rotation STEADY, KIN_JOINT, or DYN_JOINT
 TRUE                          ! Assume constant mass properties
