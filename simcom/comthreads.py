@@ -15,6 +15,14 @@ if __name__ == "__main__":
     t2 = Thread(target=simcom.tlmclient.monitor_tlm)  # , args=(10,))
     t2.start()
 
+    time.sleep(3)
+    simcom.tlmclient.s.send('260.0 CaptureCam TRUE'.encode('utf-8'))
+    print("sent command")
+
+    time.sleep(40)
+    simcom.tlmclient.s.send('260.0 CaptureCam FALSE'.encode('utf-8'))
+    print("sent command")
+
     t1.join()
     t2.join()
 

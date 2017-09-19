@@ -156,6 +156,7 @@ void FlightSoftWare(struct SCType *S);
 void ActuatorDriver(struct SCType *S);
 void Actuators(struct SCType *S);
 //void start_cmd_thread(void);
+ssize_t RecvCommand(char *cmd);
 void CmdInterpreter(void);
 void Report(void);
 void DrawScene(void);

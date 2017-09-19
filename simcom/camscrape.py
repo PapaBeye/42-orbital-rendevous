@@ -17,13 +17,17 @@ old_filenames = None
 
 pro = None
 image_counter = 0
+img_distance = 0.0
 
 def handle_new_image(ms, path):
-    global pro, image_counter
+    global pro, image_counter, img_distance
     tlm_distance = simcom.tlmclient.latest_distance
     print(ms, " ", path)
     output_image = output_dir + "/cv{0}.jpg".format(image_counter)
-    img_distance = simcom.imagedistance2.get_dist_w_fl(path, output_image)
+    try:
+        img_distance = simcom.imagedistance2.get_dist_w_fl(path, output_image)
+    except:
+        simcom.imagedistance2.copy_to_jpg(path, output_image)
     image_counter += 1
 
     #print("Distance comparison: ", tlm_distance, " ", img_distance)

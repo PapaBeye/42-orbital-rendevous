@@ -18,7 +18,7 @@
 
 #Point B[i] [Primary or Secondary] vector [x y z] along velocity
 
-150.0 CaptureCam TRUE
+#150.0 CaptureCam TRUE
 
 #200.0 SC[1].Thr[1] TRUE
 #202.0 SC[1].Thr[1] FALSE
@@ -26,7 +26,7 @@
 240.0 SC[1].Thr[0] TRUE
 242.91 SC[1].Thr[0] FALSE
 
-6000.0 CaptureCam False
+#6000.0 CaptureCam False
 
 EOF
 

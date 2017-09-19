@@ -424,6 +424,17 @@ void ReadStatesFromSocket(void)
       }
 
 }
+ssize_t RecvCommand(char *cmd) {
+    //printf("about to recv\n");
+    fflush(stdout);
+    ssize_t size_read = recv(TxSocket,cmd,512,0);
+//    if (size_read > 0) {
+//        printf("Recieved: %s\n", cmd);
+//    }
+    return size_read;
+}
+
+
 /*********************************************************************/
 void WriteStatesToSocket(void)
 {
@@ -504,7 +515,7 @@ void WriteStatesToSocket(void)
       if (EchoEnabled) printf("%s",line);
 
       /* Wait for ack */
-      recv(TxSocket,line,512,0);
+      //recv(TxSocket,line,512,0);
 }
 /*********************************************************************/
 void InitInterProcessComm(void)

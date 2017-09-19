@@ -2,7 +2,7 @@
 TX                                    ! IPC Mode (OFF, TX, RX)
 SERVER                                  ! Socket Role (SERVER or CLIENT)
 localhost  42420                         ! Server Host Name, Port
-TRUE                                    ! Allow Blocking (i.e. wait on RX)
+FALSE                                    ! Allow Blocking (i.e. wait on RX)
 FALSE                                    ! Echo to stdout
 11                                      ! Number of mnemonics
 **************  Telemetry Keys for 42 InterProcess Comm ******************

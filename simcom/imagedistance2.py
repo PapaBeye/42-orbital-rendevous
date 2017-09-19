@@ -4,6 +4,23 @@ import simcom.tlmclient
 
 import numpy as np
 
+def copy_to_jpg(image, output_image):
+
+    img = cv2.imread(image)
+    text = "{0:3.2f}".format(simcom.tlmclient.latest_distance)
+    cv2.putText(img, text,
+
+                (20, img.shape[0] - 20), cv2.FONT_HERSHEY_SIMPLEX,
+
+                2.0, (0, 255, 0), 3)
+
+    # cv2.imshow("image", img)
+    print("Output image: ", output_image)
+    cv2.imwrite(output_image, img)
+    # print("write")
+    #
+    cv2.waitKey(0)
+
 def get_dist_w_fl(image, output_image):
 
     img = cv2.imread(image)

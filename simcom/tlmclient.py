@@ -89,10 +89,10 @@ def processmessage2(mes):
 
 counter = 0
 def get_tlm_message():
-    s.send(b'x')
+    global counter
+    #s.send('x{}'.format(counter).encode('utf-8'))
     data = s.recv(BUFFER_SIZE)
     mess = data.decode('utf-8')
-    global counter
     # print(counter, ' raw mess 1: ', mess)
     # if (mess.split().__len__() <= 2):
     #     s.send(b'x')

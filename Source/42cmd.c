@@ -47,6 +47,97 @@ long SimCmdInterpreter(char CmdLine[512],double *CmdTime)
       return(NewCmdProcessed);
 }
 /**********************************************************************/
+ssize_t dummy_recv(char *cmd) {
+    strcpy(cmd, "#150.0 CaptureCam TRUE");
+    return 0;
+}
+
+long HandleCommand(double CmdTime, char *CmdLine) {
+         long NewCmdProcessed = FALSE;
+         /* Look for known command patterns */
+
+         /* Skip Comment Lines */
+         if (!strncmp(CmdLine," ",1) ||
+             !strncmp(CmdLine,"//",2) ||
+             !strncmp(CmdLine,"#",1) ||
+             !strncmp(CmdLine,"\n",1) ||
+             !strncmp(CmdLine,"%",1)) NewCmdProcessed = TRUE;
+
+         /* Sim Commands */
+         else if (SimCmdInterpreter(CmdLine,&CmdTime))
+            NewCmdProcessed = TRUE;
+
+         /* Visualization Commands */
+         #ifdef _USE_GUI_
+            else if (GuiCmdInterpreter(CmdLine,&CmdTime))
+               NewCmdProcessed = TRUE;
+         #endif
+
+         /* FSW Commands */
+         else if (FswCmdInterpreter(CmdLine,&CmdTime))
+            NewCmdProcessed = TRUE;
+
+         return NewCmdProcessed;
+}
+
+
+
+void SocketCmdInterpreter(void)
+{
+    //printf("SocketCmdInterpreter\n");
+      static char CmdLine[512];
+      static double CmdTime;
+      long NewCmdProcessed;
+
+      static long size_recvd = 0;
+
+      if (size_recvd <= 0) {
+         size_recvd = RecvCommand(CmdLine);
+//         size_recvd = dummy_recv(CmdLine);
+         if (size_recvd > 0) {
+            sscanf(CmdLine,"%lf",&CmdTime);
+         }
+      }
+
+      while (CmdTime <= SimTime && size_recvd > 0) {
+        //printf("recv loop\n");
+//         NewCmdProcessed = FALSE;
+//         /* Look for known command patterns */
+//
+//         /* Skip Comment Lines */
+//         if (!strncmp(CmdLine," ",1) ||
+//             !strncmp(CmdLine,"//",2) ||
+//             !strncmp(CmdLine,"#",1) ||
+//             !strncmp(CmdLine,"\n",1) ||
+//             !strncmp(CmdLine,"%",1)) NewCmdProcessed = TRUE;
+//
+//         /* Sim Commands */
+//         else if (SimCmdInterpreter(CmdLine,&CmdTime))
+//            NewCmdProcessed = TRUE;
+//
+//         /* Visualization Commands */
+//         #ifdef _USE_GUI_
+//            else if (GuiCmdInterpreter(CmdLine,&CmdTime))
+//               NewCmdProcessed = TRUE;
+//         #endif
+//
+//         /* FSW Commands */
+//         else if (FswCmdInterpreter(CmdLine,&CmdTime))
+//            NewCmdProcessed = TRUE;
+         NewCmdProcessed = HandleCommand(CmdTime, CmdLine);
+         /* If any match found, get next command */
+         if (NewCmdProcessed) {
+            printf("Executed Command: %s",CmdLine);
+            size_recvd = RecvCommand(CmdLine);
+//            size_recvd = dummy_recv(CmdLine);
+            if (size_recvd > 0) {
+                sscanf(CmdLine,"%lf",&CmdTime);
+            }
+            fflush(stdout);
+         }
+      }
+}
+
 void CmdInterpreter(void)
 {
       static FILE *CmdFile;
@@ -75,30 +166,30 @@ void CmdInterpreter(void)
       }
 
       while (CmdTime <= SimTime && CmdFileActive) {
-         NewCmdProcessed = FALSE;
-         /* Look for known command patterns */
-
-         /* Skip Comment Lines */
-         if (!strncmp(CmdLine," ",1) ||
-             !strncmp(CmdLine,"//",2) ||
-             !strncmp(CmdLine,"#",1) ||
-             !strncmp(CmdLine,"\n",1) ||
-             !strncmp(CmdLine,"%",1)) NewCmdProcessed = TRUE;
-
-         /* Sim Commands */
-         else if (SimCmdInterpreter(CmdLine,&CmdTime))
-            NewCmdProcessed = TRUE;
-
-         /* Visualization Commands */
-         #ifdef _USE_GUI_
-            else if (GuiCmdInterpreter(CmdLine,&CmdTime))
-               NewCmdProcessed = TRUE;
-         #endif
-
-         /* FSW Commands */
-         else if (FswCmdInterpreter(CmdLine,&CmdTime))
-            NewCmdProcessed = TRUE;
-
+//         NewCmdProcessed = FALSE;
+//         /* Look for known command patterns */
+//
+//         /* Skip Comment Lines */
+//         if (!strncmp(CmdLine," ",1) ||
+//             !strncmp(CmdLine,"//",2) ||
+//             !strncmp(CmdLine,"#",1) ||
+//             !strncmp(CmdLine,"\n",1) ||
+//             !strncmp(CmdLine,"%",1)) NewCmdProcessed = TRUE;
+//
+//         /* Sim Commands */
+//         else if (SimCmdInterpreter(CmdLine,&CmdTime))
+//            NewCmdProcessed = TRUE;
+//
+//         /* Visualization Commands */
+//         #ifdef _USE_GUI_
+//            else if (GuiCmdInterpreter(CmdLine,&CmdTime))
+//               NewCmdProcessed = TRUE;
+//         #endif
+//
+//         /* FSW Commands */
+//         else if (FswCmdInterpreter(CmdLine,&CmdTime))
+//            NewCmdProcessed = TRUE;
+        NewCmdProcessed = HandleCommand(CmdTime, CmdLine);
          /* If any match found, get next command */
          if (NewCmdProcessed) {
             printf("%s",CmdLine);
@@ -111,6 +202,9 @@ void CmdInterpreter(void)
             }
             fflush(stdout);
          }
+      }
+      if (!CmdFileActive) {
+        SocketCmdInterpreter();
       }
 }
 
