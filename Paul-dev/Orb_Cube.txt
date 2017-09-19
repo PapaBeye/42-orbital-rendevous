@@ -11,10 +11,10 @@ KEP                           !  Use Keplerian elements (KEP) or (RV) or FILE
 PA                            !  Use Peri/Apoapsis (PA) or min alt/ecc (AE)
 400.0   400.0                 !  Periapsis & Apoapsis Altitude, km
 200.0  2.0                    !  Min Altitude (km), Eccentricity
-28.5                          !  Inclination (deg)
+0.0                         !  Inclination (deg)
 0.0                           !  Right Ascension of Ascending Node (deg)
 0.0                           !  Argument of Periapsis (deg)
-45.0                           !  True Anomaly (deg)
+-15.0                           !  True Anomaly (deg)
 0.0  0.0  0.0                 !  RV Initial Position (km)
 0.0  0.0  0.0                 !  RV Initial Velocity (km/sec)
 TRV  "ORB_ID"                 !  TLE or TRV format, Label to find in file

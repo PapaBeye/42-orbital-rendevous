@@ -75,3 +75,5 @@
 #     # fn = '/home/osboxes/PycharmProjects/42-orbital-rendevous/Screenshots/CamFrame000291.ppm'
 #     fn = '/home/osboxes/PycharmProjects/42-orbital-rendevous/Screenshots/CamFrame000291.ppm'
 #     print(get_dist_w_fl(fn))
+
+print("({0:3.2f} {1})".format(2,3))

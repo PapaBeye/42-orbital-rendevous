@@ -12,11 +12,21 @@
 
 0.0 Point SC[0].B[0] Primary Vector [1.0 0.0 0.0] at SC[1]
 0.0 Align SC[0].B[0] Secondary Vector [0.0 1.0 0.0] with L-frame Vector [0.0 1.0 0.0]
+#0.0 Align SC[1].B[0] Primary Vector [1.0 0.0 0.0] with L-frame Vector [1.0 0.0 0.0]
 0.0 Point SC[1].B[0] Primary Vector [1.0 0.0 0.0] at SC[0]
 0.0 Align SC[1].B[0] Secondary Vector [0.0 1.0 0.0] with L-frame Vector [0.0 1.0 0.0]
 
-#150.0 SC[1].Thr[1] TRUE
-#151.0 SC[1].Thr[1] FALSE
+#Point B[i] [Primary or Secondary] vector [x y z] along velocity
+
+150.0 CaptureCam TRUE
+
+#200.0 SC[1].Thr[1] TRUE
+#202.0 SC[1].Thr[1] FALSE
+
+240.0 SC[1].Thr[0] TRUE
+242.91 SC[1].Thr[0] FALSE
+
+6000.0 CaptureCam False
 
 EOF
 

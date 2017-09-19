@@ -155,7 +155,7 @@ void SensorDriver(struct SCType *S);
 void FlightSoftWare(struct SCType *S);
 void ActuatorDriver(struct SCType *S);
 void Actuators(struct SCType *S);
-void start_cmd_thread(void);
+//void start_cmd_thread(void);
 void CmdInterpreter(void);
 void Report(void);
 void DrawScene(void);

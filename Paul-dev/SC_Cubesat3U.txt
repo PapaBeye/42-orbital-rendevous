@@ -6,7 +6,7 @@ PROTOTYPE_FSW                   !  Flight Software Identifier
 ************************* Orbit Parameters ****************************
 ENCKE                         !  Orbit Prop FIXED, EULER_HILL, or ENCKE
 CM                            !  Pos of CM or ORIGIN, wrt F
-  -3.0000   0.00000   0.00000 ! Pos wrt F
+   50.0000   0.00000   0.00000 ! Pos wrt F
    0.00000   0.00000   0.00000 ! Vel wrt F
 *************************** Initial Attitude ***************************
 NAN                           ! Ang Vel wrt [NL], Att [QA] wrt [NLF]
@@ -74,11 +74,11 @@ FALSE  FALSE  FALSE           ! TrnDOF Locked
 ************************* Thruster Parameters **************************
 2                             ! Number of Thrusters
 ==============================  Thr 0  =================================
- 0.1                          ! Thrust Force (N)
+ 0.001                          ! Thrust Force (N)
 -1.0  0.0  0.0                ! Thrust Axis 
  1.0  0.0  0.0                ! Location in B0, m
 ==============================  Thr 1  =================================
- 0.1                          ! Thrust Force (N)
+ 0.001                          ! Thrust Force (N)
  1.0  0.0  0.0                ! Thrust Axis
 -1.0  0.0  0.0                ! Location in B0, m
 **************************** CMG Parameters ****************************

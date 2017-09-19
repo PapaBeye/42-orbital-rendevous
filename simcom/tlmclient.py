@@ -72,7 +72,8 @@ def processmessage2(mes):
         time = lines[0].split()[1]
         # print('got time: ', time)
         ms = (3600000 * int(time[9:11])) + (60000 * int(time[12:14])) + int(1000.0 * float(time[15:21]))
-        None
+        ms = ms - 36960000
+        return None
     else:
         i = 0
         sc0 = {}
@@ -125,6 +126,7 @@ latest_distance = 0.0
 def monitor_tlm():
     global latest_distance
     print("Started TLM monitor")
+    counter = 0;
     while (True):
         # time.sleep(1)
 
@@ -132,14 +134,18 @@ def monitor_tlm():
             (ms, sc0, sc1) = get_tlm_message()
             p0 = sc0['POSITION']
             p1 = sc1['POSITION']
+            v1 = sc1['VELOCITY']
             distance = math.sqrt(pow(p0[0] - p1[0], 2) + pow(p0[1] - p1[1], 2) + pow(p0[2] - p1[2], 2))
+            altitude = math.sqrt(pow(p1[0], 2) + pow(p1[1], 2) + pow(p1[2], 2))
             latest_distance = distance
-            # print('Time:(ms) ', ms, " dist: ", distance, sc0['POSITION'], sc1['POSITION'], sc0['VELOCITY'], sc1['VELOCITY'])
+            if (counter % 10) == 0:
+                print('Time:(ms) ', ms, " dist: ", distance, altitude, sc0['POSITION'], sc1['POSITION'], sc0['VELOCITY'], sc1['VELOCITY'])
 
 
         except Exception as e:
             # print(e.args)
             pass
+        counter += 1
 
 
 if __name__ == "__main__":
